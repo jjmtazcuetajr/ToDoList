@@ -13,7 +13,6 @@ function Buttons() {
     const openAddTask = () => setAddTask(true);
 
     const closeDeleteTask = () => setDeleteTask(false);
-    const openDeleteTask = () => setDeleteTask(true);   
 
     const color = {
         color: 'red',        
@@ -64,13 +63,13 @@ function Buttons() {
                     </Modal.Footer>
             </Modal> 
 
-            <Modal >
+            <Modal show={showDeleteTask} onHide={closeDeleteTask}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Delete List</Modal.Title>
+                    <Modal.Title>Delete Oldest Task</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body><h3 style={color}>Are you sure you want to delete current list?</h3></Modal.Body>
+                    <Modal.Body><h3 style={color}>Are you sure you want to delete oldest task?</h3></Modal.Body>
                     <Modal.Footer>
-                        <Button variant="secondary" >Close</Button>
+                        <Button variant="secondary" onClick={closeDeleteTask}>Close</Button>
                         <Button variant="primary" >Delete</Button>
                     </Modal.Footer>
             </Modal>

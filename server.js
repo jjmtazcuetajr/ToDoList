@@ -45,7 +45,7 @@ routes.route('/add').post(function(req, res){
     });
 })
 
-routes.route('/delete').delete(function(req, res){
+routes.route('/delete/:id').delete(function(req, res){
   Todo.deleteOne(req.params._id, function(err){
     if(err){
       res.status(500).send({error: 'Could not delete'});

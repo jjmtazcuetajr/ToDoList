@@ -61,7 +61,7 @@ class List extends Component {
                 const stat = {
                     _id: this.state.todos[i]._id
                 }
-                axios.delete('http://localhost:3001/todos/delete', stat)
+                axios.delete('http://localhost:3001/todos/delete/:id', stat)
                     .then(res => console.log(res.data));
             }
             else{
