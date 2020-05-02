@@ -6,9 +6,10 @@ const TaskSchema = new Schema({
         type: String        
     },
     status: {
-        type: String
+        type: String,
+        default: 'in progress'
     }
 })
 
-module.exports = mongoose.model('Task', TaskSchema); 
+module.exports = mongoose.model('taskdb', TaskSchema, 'task'); 
 

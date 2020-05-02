@@ -12,7 +12,7 @@ const Todo = require('./schema/task');
 app.use(cors());
 
 
-const mongoURI = 'mongodb+srv://jjmtazcueta:bleach366@cluster0-64h4s.mongodb.net/test?retryWrites=true&w=majority';
+const mongoURI = 'mmongodb://localhost/taskdb';
 mongoose.connect(mongoURI, {useNewUrlParser: true, useUnifiedTopology: false});
 
 const db = mongoose.connection;
@@ -46,12 +46,12 @@ routes.route('/add').post(function(req, res){
 })
 
 routes.route('/delete').delete(function(req, res){
-  Todo.deleteMany({}, function(err){
+  Todo.deleteOne(req.params._id, function(err){
     if(err){
       res.status(500).send({error: 'Could not delete'});
     }
     else{
-      res.status(200).send({message: "ALL FILES DELETED"});
+      res.status(200).send({message: "Task deleted"});
     }
   })
 })

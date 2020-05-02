@@ -3,7 +3,7 @@ import axios from 'axios';
 
 class List extends Component {
     state = {
-        todos: [],
+        todos: []
     };
     componentDidMount(){
         axios.get('http://localhost:3001/todos')
@@ -32,7 +32,9 @@ class List extends Component {
                     <tr>                                                        
                         <td className="table-light">{todo.info}</td>                                                
                         <td className="table-light">
-                            <button className={todo.status ? 'btn btn-success disabled' : 'btn btn-danger'} key={todo._id} onClick={e => this.changeStatus(todo._id)}>{todo.status}</button></td>               
+                            <button className={(todo.status === "Completed") ? 'btn btn-success' : 'btn btn-info'} key={todo._id} onClick={e => this.changeStatus(todo._id)}>{todo.status}</button>
+                            <button className={'btn btn-danger'} style={{marginLeft : 5, marginRight : -73}} onClick={e => this.deleteTask(todo._id)}>Delete task</button>
+                        </td>               
                     </tr>
                 )}            
             </>
@@ -44,15 +46,28 @@ class List extends Component {
             if(this.state.todos[i]._id === e){
                 const stat = {
                     _id: this.state.todos[i]._id,
-                    status: true
+                    status: "Completed"
                 }
-                
                 axios.post('http://localhost:3001/todos/update', stat)
                    .then(res => console.log(res.data));
             }
             else
                 continue;
         }        
+    }
+    deleteTask(e){
+        for(var i = 0; i < this.state.todos.length; i++){
+            if (this.state.todos[i]._id === e) {
+                const stat = {
+                    _id: this.state.todos[i]._id
+                }
+                axios.delete('http://localhost:3001/todos/delete', stat)
+                    .then(res => console.log(res.data));
+            }
+            else{
+                continue;
+            }
+        }
     }
     render() { 
         return ( 

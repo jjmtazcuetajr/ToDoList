@@ -31,10 +31,10 @@ function Buttons() {
         e.preventDefault();         
 
         const save = {
-            todo: state.task
+            info: state.task
         }
         
-        axios.post('http://localhost:3000/tasks/add', save)
+        axios.post('http://localhost:3001/todos/add', save)
             .then(res => console.log(res.data));            
         
         state.task = ''
